@@ -39,7 +39,7 @@ def custom_logout(request):
 
 def custom_login(request):
     if request.user.is_authenticated:
-        return redirect('homepage')
+        return redirect('/')
 
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -51,7 +51,7 @@ def custom_login(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
-                return redirect('http://127.0.0.1:8000/')
+                return redirect('/')
 
         else:
             for error in list(form.errors.values()):
