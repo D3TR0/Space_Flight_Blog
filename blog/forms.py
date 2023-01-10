@@ -1,5 +1,6 @@
 
 
+
 from django import forms
 from .models import Comment
 
@@ -9,7 +10,7 @@ class CommentForm(forms.ModelForm,):
         #fields = ('name', 'email', 'body')
         fields = ('name', 'body')
     # overriding default form setting and adding bootstrap class
-    def __init__(self, user=None, *args, **kwargs):
+    def __init__(self, user="None", *args, **kwargs):
 
         super(CommentForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs = {'class': 'form-control', 'readonly' : True, 'value' : user}

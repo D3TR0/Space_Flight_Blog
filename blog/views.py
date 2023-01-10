@@ -52,12 +52,11 @@ def post_detail(request, post):
 
     return render(request, 'post_detail.html',{'post':post,'comments': comments,'comment_form':CommentForm(user=request.user.username)})
 
-
+from django.contrib import messages
 def reply_page(request):
     if request.method == "POST":
 
-        form = CommentForm(request.POST)
-
+        form = CommentForm(data=request.POST, user = request.user.username)
         if form.is_valid():
             post_id = request.POST.get('post_id')  # from hidden input
             parent_id = request.POST.get('parent')  # from hidden input
@@ -70,5 +69,7 @@ def reply_page(request):
             reply.save()
 
             return redirect(post_url + '#' + str(reply.id))
-
+        else:
+            for error in list(form.errors.values()):
+                messages.success(request, error)
     return redirect("/")
