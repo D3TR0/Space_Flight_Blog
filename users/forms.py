@@ -1,4 +1,6 @@
 # django_project/users/forms.py
+import datetime
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
@@ -48,10 +50,11 @@ class FlightForm(forms.ModelForm,):
 
 
 
-    def clean_name(self):
-        name = self.cleaned_data['name']
-        if True:
-            raise ValidationError("coooooo???")
-        return name
+    def clean_date(self):
+        date = self.cleaned_data['date']
+
+        if datetime.datetime.today().date() < date.date() :
+            raise ValidationError("zła data")
+        return date
 
 
