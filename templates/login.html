@@ -2,6 +2,30 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {{ message|safe|escape }}
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ message|safe }}
+                </div>
+            {% elif message.tags == 'info' %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    {{ message|safe|escape }}
+                </div>
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    {{ message|safe|escape }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -15,7 +39,7 @@
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Need An Account? <a class="ml-2" href="/users/register/">Sign Up Now</a>
+                Need An Account? <a class="ml-2" href="/register/">Sign Up Now</a>
             </small><br>
             <small class="text-muted">
                 <a href="/">Forgot password?</a>
