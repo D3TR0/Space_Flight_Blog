@@ -40,6 +40,9 @@
         </ul>
           <div class="navbar-nav">
                     {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="/password_change">
+                            Password change <i class="fas fa-sign-out-alt"></i>
+                        </a>
                         <a class="nav-item nav-link" href="/logout">
                             Log out <i class="fas fa-sign-out-alt"></i>
                         </a>
