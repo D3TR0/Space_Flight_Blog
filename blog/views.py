@@ -37,7 +37,7 @@ def post_detail(request, post):
 
     if request.method == 'POST':
         # A comment was posted
-        comment_form = CommentForm(data=request.POST)
+        comment_form = CommentForm(data=request.POST, user = request.user.username)
         if comment_form.is_valid():
             # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
@@ -50,7 +50,7 @@ def post_detail(request, post):
         else:
             comment_form = CommentForm()
 
-    return render(request, 'post_detail.html',{'post':post,'comments': comments,'comment_form':CommentForm})
+    return render(request, 'post_detail.html',{'post':post,'comments': comments,'comment_form':CommentForm(user=request.user.username)})
 
 
 def reply_page(request):
