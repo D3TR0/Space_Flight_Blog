@@ -5,6 +5,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.forms import PasswordResetForm
 
+from blog.models import Flight
+
+
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text='A valid email address, please.', required=True)
 
@@ -28,3 +31,19 @@ class SetPasswordForm(SetPasswordForm):
 class PasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
+
+
+
+class FlightForm(forms.ModelForm,):
+
+    class Meta:
+        model = Flight
+        fields = ('flight_id', 'name', 'country', 'company', 'succes')
+
+    def save(self, commit=True):
+        flight = super(FlightForm, self).save(commit=False)
+        if commit:
+            flight.save()
+        return flight
+
+

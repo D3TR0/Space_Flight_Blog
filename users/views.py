@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import get_user_model, login, authenticate
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, FlightForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -191,4 +191,28 @@ def custom_login(request):
         request=request,
         template_name="login.html",
         context={'form': form}
+    )
+
+
+def flight(request):
+
+    if request.method == 'POST':
+        form = FlightForm(request.POST)
+        if form.is_valid():
+            flight_obj = form.save(commit=False)
+            flight_obj.is_active = False
+            flight_obj.save()
+            return redirect('/')
+        else:
+            for error in list(form.errors.values()):
+                print(request, error)
+
+    else:
+        form = FlightForm()
+
+    return render(
+        request=request,
+        template_name="flights.html",
+        #template_name="register.html",
+        context={"form": form}
     )

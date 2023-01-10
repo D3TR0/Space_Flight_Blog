@@ -63,3 +63,25 @@ class Comment(models.Model):
 
     def get_comments(self):
         return Comment.objects.filter(parent=self).filter(active=True)
+
+
+class Flight(models.Model):
+    COUNTRY_CHOICES = (
+        ('USA', 'USA'),
+        ('CHINA', 'CHINA'),
+        ('RUSSIA', "RUSSIA"),
+        ('INDIA', 'INDIA'),
+        ('OTHER', 'OTHER')
+    )
+    COMPANY_CHOICES = (
+        ('SPACEX', 'SPACEX'),
+        ('BLUE ORIGIN', 'BLUE ORIGIN'),
+        ('ROCKET LAB', "ROCKET LAB"),
+        ('NOT COMPANY', "NOT COMPANY")
+    )
+
+    flight_id = models.PositiveIntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    country = models.CharField(max_length=15, choices=COUNTRY_CHOICES, default='USA')
+    company = models.CharField(max_length=15, choices=COMPANY_CHOICES, default='NOT COMPANY')
+    succes = models.BooleanField(default=True)
