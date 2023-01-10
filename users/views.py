@@ -216,3 +216,9 @@ def flight(request):
         #template_name="register.html",
         context={"form": form}
     )
+
+from blog.models import Flight
+def flights_table(request):
+    obj=Flight.objects.all()
+
+    return render(request,'flights_table.html',{'objs':obj})

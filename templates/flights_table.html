@@ -1,0 +1,46 @@
+<!-- django_project/users/templates/register.html -->
+{% extends "base.html" %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {{ message|safe|escape }}
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ message|safe }}
+                </div>
+            {% elif message.tags == 'info' %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    {{ message|safe|escape }}
+                </div>
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    {{ message|safe|escape }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% for item in objs %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row g-0">
+                <div class="col-md-7 ps-md-3 pt-3 pt-md-0 d-flex flex-column">
+
+                        <h2 class="card-title h5">
+                            {{  item.name}}
+                        </h2>
+
+                        <h3>  {{ item.country }}</h3>
+                        <h3> {{ item.company }}</h3>
+                        <h3> {{ item.succes }}</h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+{% endblock content %}
