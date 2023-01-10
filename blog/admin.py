@@ -19,6 +19,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Flight)
 class CommentAdmin(admin.ModelAdmin):
-    list_display=('name', 'country', 'company', 'succes')
+    list_display=('name', 'country', 'company', 'succes','date','upload')
     #list_filter = ('active', 'created', 'updated')
     #search_fields = ('name', 'body')

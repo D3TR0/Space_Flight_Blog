@@ -197,7 +197,7 @@ def custom_login(request):
 def flight(request):
 
     if request.method == 'POST':
-        form = FlightForm(request.POST)
+        form = FlightForm(request.POST, request.FILES)
         if form.is_valid():
             flight_obj = form.save(commit=False)
             flight_obj.is_active = False

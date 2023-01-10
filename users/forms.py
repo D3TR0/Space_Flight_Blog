@@ -33,17 +33,25 @@ class PasswordResetForm(PasswordResetForm):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
 
 
-
+from django.core.exceptions import ValidationError
 class FlightForm(forms.ModelForm,):
 
     class Meta:
         model = Flight
-        fields = ('flight_id', 'name', 'country', 'company', 'succes')
+        fields = ('flight_id', 'name', 'country', 'company', 'succes','date','upload')
 
     def save(self, commit=True):
         flight = super(FlightForm, self).save(commit=False)
         if commit:
             flight.save()
         return flight
+
+
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if True:
+            raise ValidationError("coooooo???")
+        return name
 
 

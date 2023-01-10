@@ -84,4 +84,6 @@ class Flight(models.Model):
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=15, choices=COUNTRY_CHOICES, default='USA')
     company = models.CharField(max_length=15, choices=COMPANY_CHOICES, default='NOT COMPANY')
+    date = models.DateTimeField(default=timezone.now)
+    upload = models.ImageField(upload_to='logo/')
     succes = models.BooleanField(default=True)
