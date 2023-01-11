@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth import get_user_model, login, authenticate
-from .forms import UserRegistrationForm, FlightForm
-from django.contrib.auth import logout
+from django.contrib.auth import get_user_model, login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.template.loader import render_to_string
@@ -10,10 +8,11 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
-from .tokens import account_activation_token
-from .forms import SetPasswordForm
-from .forms import PasswordResetForm
 from django.db.models.query_utils import Q
+from blog.models import Flight
+from .forms import UserRegistrationForm, FlightForm, SetPasswordForm, PasswordResetForm
+from .tokens import account_activation_token
+
 
 def password_reset_request(request):
     if request.method == 'POST':
@@ -33,7 +32,7 @@ def password_reset_request(request):
                 email = EmailMessage(subject, message, to=[associated_user.email])
                 if email.send():
                     messages.success(request,
-                        """
+                                     """
                         <h2>Password reset sent</h2><hr>
                         <p>
                             We've emailed you instructions for setting your password, if an account exists with the email you entered. 
@@ -41,7 +40,7 @@ def password_reset_request(request):
                             you registered with, and check your spam folder.
                         </p>
                         """
-                    )
+                                     )
                 else:
                     messages.error(request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
 
@@ -52,7 +51,9 @@ def password_reset_request(request):
         request=request,
         template_name="password_reset.html",
         context={"form": form}
-        )
+    )
+
+
 def passwordResetConfirm(request, uidb64, token):
     User = get_user_model()
     try:
@@ -96,6 +97,8 @@ def password_change(request):
 
     form = SetPasswordForm(user)
     return render(request, 'password_reset_confirm.html', {'form': form})
+
+
 def activate(request, uidb64, token):
     User = get_user_model()
     try:
@@ -114,6 +117,8 @@ def activate(request, uidb64, token):
         messages.error(request, 'Activation link is invalid!')
 
     return redirect('/')
+
+
 def activateEmail(request, user, to_email):
     mail_subject = 'Activate your user account.'
     message = render_to_string('template_activate_account.html', {
@@ -195,7 +200,6 @@ def custom_login(request):
 
 
 def flight(request):
-
     if request.method == 'POST':
         form = FlightForm(request.POST, request.FILES)
         if form.is_valid():
@@ -213,12 +217,11 @@ def flight(request):
     return render(
         request=request,
         template_name="flights.html",
-        #template_name="register.html",
         context={"form": form}
     )
 
-from blog.models import Flight
-def flights_table(request):
-    obj=Flight.objects.all()
 
-    return render(request,'flights_table.html',{'objs':obj})
+def flights_table(request):
+    obj = Flight.objects.all()
+
+    return render(request, 'flights_table.html', {'objs': obj})

@@ -1,13 +1,9 @@
-# django_project/users/forms.py
 import datetime
-
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import SetPasswordForm
-from django.contrib.auth.forms import PasswordResetForm
-
 from blog.models import Flight
+from django.core.exceptions import ValidationError
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -30,17 +26,16 @@ class SetPasswordForm(SetPasswordForm):
         model = get_user_model()
         fields = ['new_password1', 'new_password2']
 
+
 class PasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
 
 
-from django.core.exceptions import ValidationError
-class FlightForm(forms.ModelForm,):
-
+class FlightForm(forms.ModelForm, ):
     class Meta:
         model = Flight
-        fields = ('flight_id', 'name', 'country', 'company', 'succes','date','upload')
+        fields = ('flight_id', 'name', 'country', 'company', 'succes', 'date', 'upload')
 
     def save(self, commit=True):
         flight = super(FlightForm, self).save(commit=False)
@@ -48,13 +43,9 @@ class FlightForm(forms.ModelForm,):
             flight.save()
         return flight
 
-
-
     def clean_date(self):
         date = self.cleaned_data['date']
 
-        if datetime.datetime.today().date() < date.date() :
+        if datetime.datetime.today().date() < date.date():
             raise ValidationError("zła data")
         return date
-
-

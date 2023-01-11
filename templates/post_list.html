@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- django_project/main/templates/main/includes/messaging.html -->
-
 
     {% if messages %}
         {% for message in messages %}
@@ -36,28 +34,21 @@
                     </div>
                 </div>
                 <div class="col-md-7 ps-md-3 pt-3 pt-md-0 d-flex flex-column">
+                    <h2 class="card-title h5">
+                        <a href="{{ post.get_absolute_url }}">
+                            {{ post.title }}
+                        </a>
+                    </h2>
 
-                        <h2 class="card-title h5">
-                                <a href="{{ post.get_absolute_url }}">
-                                {{ post.title }}
-                                </a>
-                        </h2>
-
-                        <div class="text-muted">
-                            <small>
-                                Published {{ post.publish.date }} by <strong>{{ post.author }}</strong>
-                            </small>
-                        </div>
-
-
-                        <p class="card-text mb-auto py-2">{{ post.body|safe|striptags|truncatechars:100 }}</p>
-
-
-
-                        <div>
-                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary btn-sm">Read more</a>
-                        </div>
-
+                    <div class="text-muted">
+                        <small>
+                            Published {{ post.publish.date }} by <strong>{{ post.author }}</strong>
+                        </small>
+                    </div>
+                    <p class="card-text mb-auto py-2">{{ post.body|safe|striptags|truncatechars:100 }}</p>
+                    <div>
+                        <a href="{{ post.get_absolute_url }}" class="btn btn-primary btn-sm">Read more</a>
+                    </div>
                 </div>
             </div>
         </div>

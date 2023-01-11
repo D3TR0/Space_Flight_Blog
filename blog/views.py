@@ -1,13 +1,8 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import Post
-from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .forms import CommentForm
-
-def post_detail(request, post):
-    post=get_object_or_404(Post,slug=post,status='published')
-    return render(request, 'post_detail.html',{'post':post})
+from django.contrib import messages
 
 
 def post_list(request):
@@ -27,9 +22,8 @@ def post_list(request):
     return render(request, 'post_list.html', {'posts': posts, page: 'pages'})
 
 
-
 def post_detail(request, post):
-    post=get_object_or_404(Post,slug=post,status='published')
+    post = get_object_or_404(Post, slug=post, status='published')
 
     # List of active comments for this post
     comments = post.comments.filter(active=True)
@@ -37,7 +31,7 @@ def post_detail(request, post):
 
     if request.method == 'POST':
         # A comment was posted
-        comment_form = CommentForm(data=request.POST, user = request.user.username)
+        comment_form = CommentForm(data=request.POST, user=request.user.username)
         if comment_form.is_valid():
             # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
@@ -46,17 +40,18 @@ def post_detail(request, post):
             # Save the comment to the database
             new_comment.save()
             # redirect to same page and focus on that comment
-            return redirect(post.get_absolute_url()+'#'+str(new_comment.id))
+            return redirect(post.get_absolute_url() + '#' + str(new_comment.id))
         else:
             comment_form = CommentForm()
 
-    return render(request, 'post_detail.html',{'post':post,'comments': comments,'comment_form':CommentForm(user=request.user.username)})
+    return render(request, 'post_detail.html',
+                  {'post': post, 'comments': comments, 'comment_form': CommentForm(user=request.user.username)})
 
-from django.contrib import messages
+
 def reply_page(request):
     if request.method == "POST":
 
-        form = CommentForm(data=request.POST, user = request.user.username)
+        form = CommentForm(data=request.POST, user=request.user.username)
         if form.is_valid():
             post_id = request.POST.get('post_id')  # from hidden input
             parent_id = request.POST.get('parent')  # from hidden input
