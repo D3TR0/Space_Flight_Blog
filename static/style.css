@@ -1,3 +1,26 @@
+
+
+
+input[type='file'] {
+  color: transparent;
+
+}
+input::file-selector-button {
+  background-color: transparent;
+  background-position-x: 0%;
+  border: 0;
+  border-radius: 8px;
+  color: #eee;
+  padding: 7px;
+  text-shadow: 0 1px 1px #333;
+  transition: all 0.25s;
+}
+input::file-selector-button:hover {
+  background-position-x: 100%;
+  transform: scale(1.1);
+}
+
+
 .form {
   background-color: #15172b;
   border-radius: 20px;
@@ -13,7 +36,7 @@
   box-sizing: border-box;
   height: 1000px;
   padding: 20px;
-  width: 520px;
+  width: 420px;
 }
 .form_register {
   background-color: #15172b;

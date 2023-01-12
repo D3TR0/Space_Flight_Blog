@@ -9,6 +9,7 @@ from .MinimalSplitDateTimeMultiWidget import *
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text='A valid email address, please.', required=True)
+
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
@@ -33,8 +34,6 @@ class PasswordResetForm(PasswordResetForm):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
 
 
-
-
 class FlightForm(forms.ModelForm):
     date = DateTimeField(widget=MinimalSplitDateTimeMultiWidget())
 
@@ -52,5 +51,5 @@ class FlightForm(forms.ModelForm):
         date = self.cleaned_data['date']
 
         if datetime.today().date() < date.date():
-            raise ValidationError("zła data")
+            raise ValidationError("Incorrect date")
         return date
