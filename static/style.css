@@ -3,6 +3,18 @@
     width: 100%;
 }
 
+.container{
+    background-color: #DD2222!important;
+    font-weight: bold;
+}
+
+
+
+.test{
+    background-color: #DD22FF!important;
+    background-image: none;
+    font-weight: bold;
+}
 article img{
     max-width: 100% !important;
     height: auto !important;

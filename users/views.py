@@ -206,7 +206,7 @@ def flight(request):
             flight_obj = form.save(commit=False)
             flight_obj.is_active = False
             flight_obj.save()
-            return redirect('/')
+            return redirect('/flights_table/')
         else:
             for error in list(form.errors.values()):
                 print(request, error)
