@@ -19,10 +19,29 @@
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 700px;
+  height: 850px;
   padding: 20px;
   width: 420px;
 }
+
+.form-change-password{
+  background-color: #15172b;
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 580px;
+  padding: 20px;
+  width: 320px;
+}
+
+.form-reset{
+  background-color: #15172b;
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 380px;
+  padding: 20px;
+  width: 320px;
+}
+
 
 
 .title {
@@ -114,19 +133,6 @@
   color: #dc2f55;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .container{
     max-width: 768px;
     width: 100%;
@@ -191,8 +197,6 @@ nav a:hover {
 nav a:hover::before{
   width: 100%;
 }
-
-
 
 
 body {
