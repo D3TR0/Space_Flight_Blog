@@ -1,48 +1,82 @@
 
 {% extends "base.html" %}
+{% load custom_tag %}
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    {{ message|safe|escape }}
-                </div>
-            {% elif message.tags == 'error' %}
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    {{ message|safe }}
-                </div>
-            {% elif message.tags == 'info' %}
-                <div class="alert alert-info alert-dismissible" role="alert">
-                    {{ message|safe|escape }}
-                </div>
-            {% elif message.tags == 'warning' %}
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    {{ message|safe|escape }}
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
-
-
-
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form.as_p }}
-            </fieldset>
+                    <div class="form_register mx-auto">
+                        <legend class="border-bottom mb-4">Join</legend>
+                        {{ form.first_name.errors }}
+                        <div class="input-container ic1">
+                            {{ form.first_name|addcss:"input" }}
+                            <div class="cut"></div>
+                            <label class="placeholder">First Name</label>
+                        </div>
+                        {{ form.last_name.errors }}
+                        <div class="input-container ic2">
+                            {{ form.last_name|addcss:"input" }}
+                            <div class="cut"></div>
+                            <label class="placeholder">Last Name</label>
+                        </div>
+                        {{ form.username.errors }}
+                        <div class="input-container ic2">
+                            {{ form.username|addcss:"input" }}
+                            <div class="cut"></div>
+                            <label class="placeholder">Username</label>
+                        </div>
+                        {{ form.email.errors }}
+                        <div class="input-container ic2">
+                            {{ form.email|addcss:"input" }}
+                            <div class="cut"></div>
+                            <label for="firstname" class="placeholder">Email</label>
+                        </div>
+                        {{ form.password1.errors }}
+                        <div class="input-container ic2">
 
-            By registering, you accept the Terms of Service and Privacy Notice
+                            {{ form.password1|addcss:"input" }}
+                            <div class="cut"></div>
+                            <label class="placeholder">Password</label>
+                        </div>
+                        {{ form.password2.errors }}
+                        <div class="input-container ic2">
+                            {{ form.password2|addcss:"input" }}
+                            <div class="cut"></div>
+                            <label class="placeholder">Confirm Parssword</label>
+                        </div>
+                        <div class="form-group input-container ic2">
+                            <button class="btn btn-outline-info" type="submit">Sign up</button>
+                        </div>
+                    </div>
+                </fieldset>
 
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+{#            <fieldset class="form-group">#}
+{#                <legend class="border-bottom mb-4">Join Today</legend>#}
+{#                {{ form.as_p }}#}
+{#            </fieldset>#}
+{##}
+{#            By registering, you accept the Terms of Service and Privacy Notice#}
+{##}
+{#            <div class="form-group">#}
+{#                <button class="btn btn-outline-info" type="submit">Sign Up</button>#}
+{#            </div>#}
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="/login">Sign In</a>
+                Already Have An Account? <a class="ml-2 post-title" href="/login">Sign In</a>
             </small>
         </div>
     </div>

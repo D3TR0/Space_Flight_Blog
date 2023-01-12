@@ -29,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/flights_table">Fliht List</a>
+                            <a class="nav-link active" aria-current="page" href="/flights_table">Flight List</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/flight">Add flight</a>
@@ -57,7 +57,27 @@
         </nav>
 
         <main class="container my-3 corner">
-
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            {{ message|safe|escape }}
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            {{ message|safe }}
+                        </div>
+                    {% elif message.tags == 'info' %}
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            {{ message|safe|escape }}
+                        </div>
+                    {% elif message.tags == 'warning' %}
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            {{ message|safe|escape }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
             {% block content %}
 
             {% endblock content %}

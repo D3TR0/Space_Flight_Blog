@@ -4,11 +4,11 @@ from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPa
 from django.contrib.auth import get_user_model
 from blog.models import Flight
 from django.core.exceptions import ValidationError
+from .MinimalSplitDateTimeMultiWidget import *
 
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text='A valid email address, please.', required=True)
-
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
@@ -32,9 +32,9 @@ class PasswordResetForm(PasswordResetForm):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
 
 
-from .MinimalSplitDateTimeMultiWidget import *
 
-class FlightForm(forms.ModelForm, ):
+
+class FlightForm(forms.ModelForm):
     date = DateTimeField(widget=MinimalSplitDateTimeMultiWidget())
 
     class Meta:
