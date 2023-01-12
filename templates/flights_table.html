@@ -21,31 +21,72 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-
+        <div class="card mb-3">
+        <div class="card-body">
+            <div class="row g-0">
+                <div >
+                    <div class="row">
+                        <div class="col-sm">
+                            Flight id
+                        </div>
+                        <div class="col-sm">
+                            Name
+                        </div>
+                        <div class="col-sm">
+                            Logo
+                        </div>
+                        <div class="col-sm">
+                            Country
+                        </div>
+                        <div class="col-sm">
+                            Company
+                        </div>
+                        <div class="col-sm">
+                            Date
+                        </div>
+                        <div class="col-sm">
+                            Status
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% for item in objs|dictsort:"flight_id" %}
     <div class="card mb-3">
         <div class="card-body">
             <div class="row g-0">
-                <div class="col-md-7 ps-md-3 pt-3 pt-md-0 d-flex flex-column">
-                    <table>
-                        <tr>
-                            <td>{{  item.flight_id}} </td>
-                            <td>{{  item.name}} </td>
-                            <td><img src="{{ item.upload.url }}" class="rounded featured-image-list" alt="sad"> </td>
-                            <td>{{ item.country }} </td>
-                            <td>{{ item.company }} </td>
-                            <td>{{ item.date }} </td>
-                            <td> {{ item.succes }}</td>
-                        </tr>
-                    </table>
-                    <h2 class="card-title h5">
-                        {{  item.name}}
-                    </h2>
-                    <h3 class="test"> {{ item.country }}</h3>
-                    <h3> {{ item.company }}</h3>
-                    <h3> {{ item.succes }}</h3>
-                    <h3> {{ item.date }}</h3>
-                    <img src="{{ item.upload.url }}" class="rounded featured-image-list" alt="sad">
+                <div >
+                    <div class="row">
+                        <div class="col-sm">
+                            {{  item.flight_id}}
+                        </div>
+                        <div class="col-sm">
+                            {{  item.name}}
+                        </div>
+                        <div class="col-sm">
+                            <img src="{{ item.upload.url }}" class="rounded featured-image-list img-fluid" alt="sad">
+                        </div>
+                        <div class="col-sm">
+                            {{ item.country }}
+                        </div>
+                        <div class="col-sm">
+                            {{ item.company }}
+                        </div>
+                        <div class="col-sm">
+                            {{ item.date }}
+                        </div>
+                        {% if item.succes == True %}
+                            <div class="col-sm">
+                            <p>&#9989;</p>
+{#                            <p>&#10003;</p>#}
+                            </div>
+                        {% else %}
+                            <div class="col-sm">
+                            <p>&#10060;</p>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

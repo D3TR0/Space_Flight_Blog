@@ -32,7 +32,11 @@ class PasswordResetForm(PasswordResetForm):
         super(PasswordResetForm, self).__init__(*args, **kwargs)
 
 
+from .MinimalSplitDateTimeMultiWidget import *
+
 class FlightForm(forms.ModelForm, ):
+    date = DateTimeField(widget=MinimalSplitDateTimeMultiWidget())
+
     class Meta:
         model = Flight
         fields = ('flight_id', 'name', 'country', 'company', 'succes', 'date', 'upload')
@@ -46,6 +50,6 @@ class FlightForm(forms.ModelForm, ):
     def clean_date(self):
         date = self.cleaned_data['date']
 
-        if datetime.datetime.today().date() < date.date():
+        if datetime.today().date() < date.date():
             raise ValidationError("zła data")
         return date
