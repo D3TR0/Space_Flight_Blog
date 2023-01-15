@@ -24,7 +24,6 @@
             {{ comment_form.as_p }}
             <button type="submit" class="btn btn-outline-info">Comment</button>
         </form>
-
         {% with comments.count as total_comments %}
             <h3 class="mt-5">
                 {{ total_comments }} comment{{ total_comments|pluralize }}

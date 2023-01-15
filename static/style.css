@@ -1,13 +1,12 @@
 
-
-
 input[type='file'] {
   color: transparent;
 
 }
+
 input::file-selector-button {
   background-color: transparent;
-  background-position-x: 0%;
+  background-position-x: 0;
   border: 0;
   border-radius: 8px;
   color: #eee;
@@ -15,11 +14,11 @@ input::file-selector-button {
   text-shadow: 0 1px 1px #333;
   transition: all 0.25s;
 }
+
 input::file-selector-button:hover {
   background-position-x: 100%;
   transform: scale(1.1);
 }
-
 
 .form {
   background-color: #15172b;
@@ -38,6 +37,7 @@ input::file-selector-button:hover {
   padding: 20px;
   width: 420px;
 }
+
 .form_register {
   background-color: #15172b;
   border-radius: 20px;
@@ -64,8 +64,6 @@ input::file-selector-button:hover {
   padding: 20px;
   width: 320px;
 }
-
-
 
 .title {
   color: #eee;
@@ -161,7 +159,6 @@ input::file-selector-button:hover {
     width: 100%;
 }
 
-
 .container{
     background-color: #222831!important;
     font-weight: bold;
@@ -175,14 +172,10 @@ input::file-selector-button:hover {
     color: #54b3d6;
 }
 
-
-
-
 .corner {
     border-radius: 10px;
     border: 2px solid #333333;
 }
-
 
 nav a {
     background-image: linear-gradient(
@@ -221,7 +214,6 @@ nav a:hover::before{
   width: 100%;
 }
 
-
 body {
 	background: #cdcdcd;
     background: linear-gradient(180deg, rgba(205,205,205,1) 0%, rgba(93,93,93,1) 50%, rgba(34,39,43,1) 100%);
@@ -234,6 +226,7 @@ body {
 .nav-back{
     background: #cdcdcd;
     background: linear-gradient(0deg, rgba(205,205,205,1) 0%, rgba(93,93,93,1) 42%, rgba(62,65,67,1) 71%, rgba(34,39,43,1) 100%);}
+
 article img{
     max-width: 100% !important;
     height: auto !important;

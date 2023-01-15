@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block content %}
     <div class="card mb-3">
         <div class="card-body">
@@ -31,44 +32,44 @@
             </div>
         </div>
     </div>
+
     {% for item in objs|dictsortreversed:"flight_id" %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="row g-0">
-                <div >
-                    <div class="row">
-                        <div class="col-sm">
-                            {{  item.flight_id}}
-                        </div>
-                        <div class="col-sm">
-                            {{  item.name}}
-                        </div>
-                        <div class="col-sm">
-                            <img src="{{ item.upload.url }}" class="rounded featured-image-list img-fluid" alt="sad">
-                        </div>
-                        <div class="col-sm">
-                            {{ item.country }}
-                        </div>
-                        <div class="col-sm">
-                            {{ item.company }}
-                        </div>
-                        <div class="col-sm">
-                            {{ item.date }}
-                        </div>
-                        {% if item.succes == True %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row g-0">
+                    <div >
+                        <div class="row">
                             <div class="col-sm">
-                            <p>&#9989;</p>
-{#                            <p>&#10003;</p>#}
+                                {{  item.flight_id}}
                             </div>
-                        {% else %}
                             <div class="col-sm">
-                            <p>&#10060;</p>
+                                {{  item.name}}
                             </div>
-                        {% endif %}
+                            <div class="col-sm">
+                                <img src="{{ item.upload.url }}" class="rounded featured-image-list img-fluid" alt="sad">
+                            </div>
+                            <div class="col-sm">
+                                {{ item.country }}
+                            </div>
+                            <div class="col-sm">
+                                {{ item.company }}
+                            </div>
+                            <div class="col-sm">
+                                {{ item.date }}
+                            </div>
+                            {% if item.succes == True %}
+                                <div class="col-sm">
+                                <p>&#9989;</p>
+                                </div>
+                            {% else %}
+                                <div class="col-sm">
+                                <p>&#10060;</p>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endfor %}
 {% endblock content %}

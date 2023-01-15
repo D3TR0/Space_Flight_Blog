@@ -1,6 +1,6 @@
-
 {% extends "base.html" %}
 {% load custom_tag %}
+
 {% block content %}
     <div class="content-section">
         <form method="POST">
@@ -30,7 +30,6 @@
                             <label class="placeholder">Username</label>
                         </div>
                         {{ form.email.errors }}
-{#                        {{ form.email.help_text}}#}
                         <div class="input-container ic2">
                             {{ form.email|addcss:"input" }}
                             <div class="cut"></div>
